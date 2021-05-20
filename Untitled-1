@@ -1,0 +1,6 @@
+// DEPLOY FIREBASE
+firebase login
+firebase init -> hosting and deploy site
+npm run build 
+firebase deploy
+firebase logout
