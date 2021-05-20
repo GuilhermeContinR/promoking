@@ -4,6 +4,8 @@ import { storage, db } from './firebase'
 // import Modal from '@material-ui/core/Modal';
 import { Button, TextField } from '@material-ui/core';
 import './imageUpload.css';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
@@ -75,9 +77,41 @@ function ImageUpload({username}){
 
     return(
         <div className="imageUpload">
-            <progress className="progress" value={progress} max="100" />
+            
             <TextField
-                label="Caption"
+                label="Descrição"
+                type="text"
+                value={caption}
+                onChange={e => { setCaption(e.target.value) }}
+                variant="outlined"
+                m={2}
+                className={classes.p10}
+            />
+            <TextField
+                label="Preço"
+                type="text"
+                value={caption}
+                onChange={e => { setCaption(e.target.value) }}
+                variant="outlined"
+                m={2}
+                className={classes.p10}
+            />
+            <FormControlLabel
+                value="0"
+                control={<Checkbox color="primary" />}
+                label="Grátis"
+            />
+            <TextField
+                label="Url"
+                type="text"
+                value={caption}
+                onChange={e => { setCaption(e.target.value) }}
+                variant="outlined"
+                m={2}
+                className={classes.p10}
+            />
+            <TextField
+                label="Nome da Loja"
                 type="text"
                 value={caption}
                 onChange={e => { setCaption(e.target.value) }}
@@ -90,6 +124,7 @@ function ImageUpload({username}){
                 onChange={handleChange}
                 className={classes.p10}
             />
+            <progress className="progress" value={progress} max="100" />
             <Button variant="contained" color="primary" onClick={handleUpload}
                 className={classes.p10}
                

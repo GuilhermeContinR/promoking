@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         textDecorationLine: "line-through"
     },
     fontPreco:{
-        fontSize:24
+        fontSize:34
     }
 }));
 
@@ -51,9 +51,9 @@ export default function RecipeReviewCard({ imageUrl, caption, username }) {
                                 <Typography gutterBottom variant="subtitle1">
                                     {caption}
                                 </Typography>
-                                <Typography variant="body2" color="textSecondary" gutterBottom className={classes.promo}>
+                                {/* <Typography variant="body2" color="textSecondary" gutterBottom className={classes.promo}>
                                     R$ 40,31
-                                </Typography>
+                                </Typography> */}
                                 <Typography variant="body2" className={classes.fontPreco}>
                                     R$ 40,31
                                 </Typography>

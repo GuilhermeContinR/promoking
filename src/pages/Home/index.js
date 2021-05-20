@@ -7,8 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
 import { Button, TextField } from '@material-ui/core';
-import ImageUpload from '../../services/imageUpload';
 import Card from '../../components/Card';
+import ModalPost from '../../components/ModalPost';
 
 const useStyles = makeStyles((theme) => ({
     // paper: {
@@ -31,6 +31,18 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
+    
+    paperModal: {
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        // border: '2px solid #000',
+        boxShadow: theme.shadows[3],
+        padding: theme.spacing(2, 4, 3),
+    },
+    p10: {
+        margin: theme.spacing(1),
+    },
 }));
 function getModalStyle() {
     const top = 50;
@@ -46,7 +58,7 @@ function getModalStyle() {
 function App() {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
-
+    const [modalPost, setModalPost] = useState(false)
     const [posts, setPosts] = useState([]);
 
     const [openSignIn, setOpenSignIn] = useState(false)
@@ -104,20 +116,25 @@ function App() {
         setOpenSignIn(false)
     }
 
+    const handleCloseModal = () => {
+        setModalPost(false)
+        console.log('false') 
+    };
+
     return (
         <div className="App">
 
-            {/* Caption Iput */}
-            {/* File picker */}
-            {/* post button */}
-
-
+            {
+                user?.displayName ? 
+                    <ModalPost username={user.displayName} modalPost={modalPost} onCloseModal={handleCloseModal} /> : null
+            }
+            
 
             <Modal
                 open={open}
-                onClose={() => setOpen(false)}
+                onClose={() => setOpen(false)} 
             >
-                <div style={modalStyle} className={classes.paper}>
+                <div style={modalStyle} className={classes.paperModal}>
                     <form className="app__signup">
                         <center className="modal__form">
 
@@ -159,47 +176,17 @@ function App() {
                     </form>
                 </div>
             </Modal>
-            <Modal
-                open={openSignIn}
-                onClose={() => setOpenSignIn(false)}
-            >
-                <div style={modalStyle} className={classes.paper}>
-                    <form className="app__signup">
-                        <center className="modal__form">
-
-                            <TextField
-                                label="E-mail"
-                                type="text"
-                                value={email}
-                                onChange={e => { setEmail(e.target.value) }}
-                                variant="outlined"
-                                className={classes.p10}
-                            />
-
-                            <TextField
-                                label="Senha"
-                                type="password"
-                                value={password}
-                                onChange={e => { setPassword(e.target.value) }}
-                                variant="outlined"
-                                className={classes.p10}
-                            />
-
-                            <Button variant="contained" color="primary" onClick={signIn}
-                                className={classes.p10}
-                                type="submitt"
-                            >
-                                Login
-                        </Button>
-                        </center>
-                    </form>
-                </div>
-            </Modal>
+           
             <div className="app__header">
 
                
                 {
-                    user ? <Button onClick={() => auth.signOut()}>Logout</Button>
+                    user ? 
+                    <div className="app__loginContainer">
+                            <Button onClick={() => auth.signOut()}>Logout</Button>
+                            <Button onClick={() => setModalPost(true)}>Nova Promoção</Button>
+                        </div>
+                        
                         :
                         <div className="app__loginContainer">
                             <Button onClick={() => setOpenSignIn(true)}>Login</Button>
@@ -238,13 +225,47 @@ function App() {
 
 
 
-            {user?.displayName ? (
-                <ImageUpload username={user.displayName} />
-            )
-                :
-                (<h3>Faca login para upload</h3>)
-            }
+           
+
+            <Modal
+                open={openSignIn}
+                onClose={() => setOpenSignIn(false)} 
+            >
+                <div style={modalStyle} className={classes.paperModal}>
+                    <form className="app__signup">
+                        <center className="modal__form">
+                            <h4 className="app__login">Acessar</h4>
+                            <TextField
+                                label="E-mail"
+                                type="text"
+                                value={email}
+                                onChange={e => { setEmail(e.target.value) }}
+                                variant="outlined"
+                                className={classes.p10}
+                            />
+
+                            <TextField
+                                label="Senha"
+                                type="password"
+                                value={password}
+                                onChange={e => { setPassword(e.target.value) }}
+                                variant="outlined"
+                                className={classes.p10}
+                            />
+
+                            <Button variant="contained" color="primary" onClick={signIn}
+                                className={classes.p10}
+                                type="submitt"
+                            >
+                                Login
+                        </Button>
+                        </center>
+                    </form>
+                </div>
+            </Modal>
         </div>
+
+        
     );
 }
 

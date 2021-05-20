@@ -42,7 +42,12 @@
   position: -webkit-sticky;
   position: sticky;
 }
-
+.app__login{
+  font-size: 24px;
+  font-family:"Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
 .app__header {
   background-color: white;
   padding: 20px;
@@ -151,9 +156,8 @@ footer h4 {
   .no-mobile {
     display: none;
   }
-
-  .app__posts {
+  /* .app__posts { */
     /* padding-left: 0px;
     padding-right: 0px; */
-  }
+  /* } */
 }
