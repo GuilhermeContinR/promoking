@@ -117,8 +117,7 @@ function App() {
     }
 
     const handleCloseModal = () => {
-        setModalPost(false)
-        console.log('false') 
+        setModalPost(false);
     };
 
     return (
@@ -126,7 +125,7 @@ function App() {
 
             {
                 user?.displayName ? 
-                    <ModalPost username={user.displayName} modalPost={modalPost} onCloseModal={handleCloseModal} /> : null
+                    <ModalPost username={user.displayName} modalPost={modalPost} handleCloseModal={handleCloseModal} /> : null
             }
             
 
@@ -198,17 +197,14 @@ function App() {
 
             </div>
             {/* <Card/> */}
-            <Grid container spacing={4} className={classes.p15} direction="row"
+            <Grid container direction="row"
                 justify="center"
                 alignItems="center" >
                 {
                     posts.map(({ id, post }) => (
 
-                        <Grid item xs={12} sm={12} md={8} lg={8}  >
-                            {/* <Paper className={classes.paper}> */}
-                                <Card key={id} postId={id} user={user} username={post.username} imageUrl={post.imageUrl} caption={post.caption}/>
-                                {/* <Post key={id} postId={id} user={user} username={post.username} imageUrl={post.imageUrl} caption={post.caption} /> */}
-                            {/* </Paper> */}
+                        <Grid item xs={12} sm={12} md={8} lg={8} key={id}>
+                                <Card postId={id} user={user} username={post.username} imageUrl={post.imageUrl} caption={post.caption}/>
                         </Grid>
 
                     ))

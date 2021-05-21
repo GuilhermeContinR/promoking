@@ -43,11 +43,11 @@ function getModalStyle() {
     };
 }
 
-export default function ModalPost({ modalPost, username, handleCloseModal}) {
+export default function ModalPost({ modalPost, username, handleCloseModal = () => {}}) {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
 
-    console.log(handleCloseModal)
+    
     return(
         <Modal
             open={modalPost}
